@@ -6,7 +6,10 @@ import {
 } from "@heroicons/react/24/outline";
 import Header2 from "./ui/landing/header2";
 import Footer from "./ui/landing/footer";
+import mockData from "./lib/mock";
+
 export default function page() {
+  const items = mockData.items;
   return (
     <>
       <Header2 />
@@ -25,7 +28,7 @@ export default function page() {
             </Link>
           </div>
         </section>
-        <section className="my-8 flex flex-col md:flex-row">
+        <section className="my-8 flex flex-col md:flex-row overflow-y-auto ">
           <div className="md:w-1/3 md:pr-4 flex flex-col items-center border border-neutral p-4 rounded-md">
             {/* Left Column (On medium and large screens) */}
             <NewspaperIcon className="w-12 h-12 text-primary mb-2 " />
@@ -71,15 +74,15 @@ export default function page() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Found Document Items (Repeat this block for each item) */}
-              {[1, 2, 3, 4, 5, 6].map((item) => (
+              {items.map((item) => (
                 <div
-                  key={item}
+                  key={item.id}
                   className="card-body border border-neutral p-4 rounded-md">
                   {/* Document Image or Icon */}
 
                   {/* Document Details */}
-                  <h3 className="card-title">Document Name</h3>
-                  <p>Description or additional details about the document.</p>
+                  <h3 className="card-title">{item.name}</h3>
+                  <p>{item.description}</p>
 
                   {/* Additional Details or Actions */}
                   <div className="card-actions justify-end">
@@ -95,9 +98,7 @@ export default function page() {
 
             {/* CTA to View All Categories */}
             <div className="text-center mt-4">
-              <Link
-                href="/view-all-categories"
-                className="text-primary hover:underline">
+              <Link href="#" className="text-primary hover:underline">
                 View All Categories
               </Link>
             </div>
