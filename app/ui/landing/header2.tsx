@@ -42,7 +42,7 @@ const Header2 = () => {
 
             <li>
               <Link
-                href="lost"
+                href="/lost"
                 className="text-sm text-primary"
                 aria-label="Report items">
                 I{"'"}ve Lost
