@@ -1,23 +1,46 @@
+import { supabase } from "@/app/lib/client";
+import Header from "@/app/ui/Appdashboard/header";
+import Footer from "@/app/ui/landing/footer";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-const mockItem = {
-  category: "ID",
-  firstName: "John",
-  lastName: "Doe",
-};
+export const revalidate = 0;
 
-const page: React.FC = () => {
+export async function generateStaticParams() {
+  const { data: founditems } = await supabase.from("founditems").select("id");
+
+  return founditems?.map(({ id }) => ({
+    id,
+  }));
+}
+
+export default async function Post({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  const { data: item } = await supabase
+    .from("founditems")
+    .select()
+    .match({ id })
+    .single();
+
+  if (!item) {
+    notFound();
+  }
+
   return (
     <>
-      {mockItem ? (
+      <Header />
+      {item ? (
         <>
           <div className="card w-96 bg-neutral text-neutral-content m-4">
             <div className="card-body items-center text-center bg-base-400">
-              <h1 className="card-title">Found {mockItem.category} Card</h1>
-              <p>First Name: {mockItem.firstName}</p>
-              <p>Last Name: {mockItem.lastName}</p>
+              <h1 className="card-title">Found {item.category} Card</h1>
+              <p>First Name: {item.name}</p>
+              <p>Last Name: {item.locationfound}</p>
               <div className="card-actions justify-end">
-                <Link href="/checkOut" className="btn btn-primary">
+                <Link href="/checkOut" className=" btn btn-primary">
                   Claim
                 </Link>
               </div>
@@ -41,10 +64,10 @@ const page: React.FC = () => {
           </p>
         </>
       ) : (
+        // Handle the case when 'item' is not available
         <p>No item found.</p>
       )}
+      <Footer />
     </>
   );
-};
-
-export default page;
+}

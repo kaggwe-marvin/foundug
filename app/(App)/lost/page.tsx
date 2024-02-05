@@ -1,10 +1,18 @@
 import Footer from "@/app/ui/landing/footer";
 import Header from "@/app/ui/Appdashboard/header";
-import mockData from "@/app/lib/mock";
 import Link from "next/link";
+import { supabase } from "@/app/lib/client";
+export default async function page() {
+  const { data: Lostitem, error } = await supabase
+    .from("founditems")
+    .select("*");
+  if (error) {
+    console.error("Error fetching data:", error.message);
+  } else {
+    console.log("Fetched data from Supabase:", Lostitem);
+  }
 
-export default function page() {
-  const items = mockData.items;
+  const items = Lostitem || [];
   return (
     <>
       <Header />
@@ -40,13 +48,13 @@ export default function page() {
 
                   {/* Document Details */}
                   <h3 className="card-title">{item.name}</h3>
-                  <p>Date Lost: {item.dateLost}</p>
+                  <p>Date Lost: {item.datefound}</p>
                   <p className="text-gray-600">Category: {item.category}</p>
 
                   {/* Additional Details or Actions */}
                   <div className="card-actions justify-end">
                     <Link
-                      href={`/item/$[id]`}
+                      href={`/item/${item?.id}`}
                       className="btn btn-outline btn-primary"
                       aria-label="View Details">
                       View Details
