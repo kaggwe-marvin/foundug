@@ -4,16 +4,6 @@ import Footer from "@/app/ui/landing/footer";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export const revalidate = 0;
-
-export async function generateStaticParams() {
-  const { data: founditems } = await supabase.from("founditems").select("id");
-
-  return founditems?.map(({ id }) => ({
-    id,
-  }));
-}
-
 export default async function Post({
   params: { id },
 }: {
