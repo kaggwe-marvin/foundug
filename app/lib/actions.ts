@@ -43,14 +43,13 @@ export async function addFound(
       throw new Error("Failed to add found item");
     }
 
-    console.log("Found item added:", Founditem?.[0]?.name || "Unknown");
+    console.log("Found item added:");
     revalidatePath("/lost");
     return {
-      message: `Found item added: ${Founditem?.[0]?.name || "Unknown"}`,
+      message: "Found item added",
     };
   } catch (error) {
     console.error("Catch block error:", error);
     return { message: "Failed to add found item" };
   }
 }
-
