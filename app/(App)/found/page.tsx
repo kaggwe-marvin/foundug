@@ -1,6 +1,6 @@
-import { AddForm } from "@/app/ui/Appdashboard/forms/FoundForm";
 import Header from "@/app/ui/Appdashboard/header";
 import Footer from "@/app/ui/landing/footer";
+import { AddForm } from "./my-form";
 
 export default async function Page() {
   return (

@@ -6,14 +6,23 @@ import {
 } from "@heroicons/react/24/outline";
 import Header2 from "./ui/landing/header2";
 import Footer from "./ui/landing/footer";
-import mockData from "./lib/mock";
+import { supabase } from "./lib/client";
 
-export default function page() {
-  const items = mockData.items;
+export default async function page() {
+  const { data: Lostitem, error } = await supabase
+    .from("founditems")
+    .select("*");
+  if (error) {
+    console.error("Error fetching data:", error.message);
+  } else {
+    console.log("Fetched data from Supabase:", Lostitem);
+  }
+
+  const items = Lostitem || [];
   return (
     <>
       <Header2 />
-      <main className="flex min-h-screen flex-col p-6">
+      <main className="flex min-h-screen flex-col p-6" data-theme="cupcake">
         <section className="my-8">
           <h1 className="text-4xl font-extrabold mb-4">
             Find and Reclaim Your Lost Documents Effortlessly!
@@ -22,9 +31,12 @@ export default function page() {
             A dedicated platform to report found documents and reunite lost
             documents with their owners.
           </p>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-between items-center">
             <Link href="/found" className="btn btn-outline btn-primary">
               Report Found Document
+            </Link>
+            <Link href="/lost" className="btn btn-outline btn-primary">
+              Report Lost Document
             </Link>
           </div>
         </section>
@@ -86,11 +98,12 @@ export default function page() {
 
                   {/* Additional Details or Actions */}
                   <div className="card-actions justify-end">
-                    <button
+                    <Link
+                      href={`/item/${item?.id}`}
                       className="btn btn-outline btn-primary"
                       aria-label="View Details">
                       View Details
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -98,7 +111,7 @@ export default function page() {
 
             {/* CTA to View All Categories */}
             <div className="text-center mt-4">
-              <Link href="#" className="text-primary hover:underline">
+              <Link href="/lost" className="text-primary hover:underline">
                 View All Categories
               </Link>
             </div>

@@ -11,7 +11,7 @@ export default async function Post({
 }) {
   const { data: item } = await supabase
     .from("founditems")
-    .select()
+    .select("*,locations(name),categories(name),statuses(name)")
     .match({ id })
     .single();
 
@@ -24,19 +24,25 @@ export default async function Post({
       <Header />
       {item ? (
         <>
-          <div className="card w-96 bg-neutral text-neutral-content m-4">
-            <div className="card-body items-center text-center bg-base-400">
-              <h1 className="card-title">Found {item.category} Card</h1>
-              <p>First Name: {item.name}</p>
-              <p>Last Name: {item.locationfound}</p>
-              <div className="card-actions justify-end">
-                <Link href="/checkOut" className=" btn btn-primary">
-                  Claim
-                </Link>
+          <div className="md:w-full mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="card-body border border-neutral p-4 rounded-md">
+                <div className="card-body items-center text-center bg-base-400">
+                  <h1 className="card-title">
+                    Found {item.categories?.name} Card
+                  </h1>
+                  <p>First Name: {item.name}</p>
+                  <p>Last Name: {item.locations?.name}</p>
+                  <div className="card-actions justify-end">
+                    <Link href="/checkOut" className=" btn btn-primary">
+                      Claim
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <h2 className="text-xl font-semibold">Claim This Item</h2>
+          <h2 className="text-xl font-semibold">To Claim This Item</h2>
           <p className="text-gray-600 mt-2">
             To claim this reported item, please follow these steps:
           </p>

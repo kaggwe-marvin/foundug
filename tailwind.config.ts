@@ -8,7 +8,7 @@ const config: Config = {
   ],
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["light", "night", "cupcake"],
+    themes: ["cupcake", "night", "cmyk"],
   },
 };
 export default config;

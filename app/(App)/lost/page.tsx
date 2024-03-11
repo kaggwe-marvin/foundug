@@ -5,7 +5,7 @@ import { supabase } from "@/app/lib/client";
 export default async function page() {
   const { data: Lostitem, error } = await supabase
     .from("founditems")
-    .select("*");
+    .select("*, categories(*)");
   if (error) {
     console.error("Error fetching data:", error.message);
   } else {
@@ -49,7 +49,9 @@ export default async function page() {
                   {/* Document Details */}
                   <h3 className="card-title">{item.name}</h3>
                   <p>Date Lost: {item.datefound}</p>
-                  <p className="text-gray-600">Category: {item.category}</p>
+                  <p className="text-gray-600">
+                    Category: {item.categories?.name}
+                  </p>
 
                   {/* Additional Details or Actions */}
                   <div className="card-actions justify-end">

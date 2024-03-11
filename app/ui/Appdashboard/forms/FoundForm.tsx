@@ -4,13 +4,10 @@ import { addFound } from "@/app/lib/actions";
 import { useFormState } from "react-dom";
 import CustomInput from "./CustomInput";
 import SubmitButton from "./SubmitButton";
+import { State } from "@/app/(App)/found/state";
 
-const initialState = {
-  message: "",
-};
-
-export function AddForm() {
-  const [state, formAction] = useFormState(addFound, initialState);
+export function AddForm({ initalState }: { initalState: State }) {
+  const [state, formAction] = useFormState(addFound, initalState);
 
   return (
     <form action={formAction}>
@@ -28,12 +25,14 @@ export function AddForm() {
         placeholder="Type your description here"
         inputType="textarea"
       />
-      
+      <CustomInput
+        label="Upload Image"
+        id="file"
+        name="file"
+        inputType="file"
+      />
 
       <SubmitButton />
-      <p aria-live="polite" className="sr-only" role="status">
-        {state?.message}
-      </p>
     </form>
   );
 }

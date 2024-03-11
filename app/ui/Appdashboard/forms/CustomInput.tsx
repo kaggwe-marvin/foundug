@@ -36,6 +36,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           type="file"
           id={id}
           name={name}
+          accept="image/*"
           required={required}
         />
       ) : (

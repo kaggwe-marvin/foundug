@@ -3,14 +3,19 @@
 import { useFormStatus } from "react-dom";
 
 function SubmitButton() {
-  const { pending } = useFormStatus();
-
+  const status = useFormStatus();
   return (
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary" type="submit" aria-disabled={pending}>
-        {pending ? "Adding..." : "Submit item"}
-      </button>
-    </div>
+    <button
+      aria-disabled={status.pending}
+      onClick={(e) => {
+        // prevent multiple submits
+        if (status.pending) e.preventDefault();
+      }}
+      className={`rounded-md text-white px-4 py-2 ${
+        status.pending ? "bg-blue-300" : "bg-blue-400"
+      }`}>
+      {status.pending ? "Submiting..." : "Submit"}
+    </button>
   );
 }
 
