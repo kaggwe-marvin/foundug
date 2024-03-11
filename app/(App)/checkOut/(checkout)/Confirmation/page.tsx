@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 const Page = () => {
   const searchParams = useSearchParams();
   const getResponse = searchParams.get("resp");
-  const paymentResponse = JSON.parse(getResponse);
+  const paymentResponse = getResponse ? JSON.parse(getResponse) : null;
   console.log(paymentResponse);
   return (
     <>
