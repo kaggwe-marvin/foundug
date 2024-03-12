@@ -1,12 +1,40 @@
+"use client";
 import Header from "@/app/ui/Appdashboard/header";
 import Footer from "@/app/ui/landing/footer";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
+// Define the type of the payment response
+interface PaymentResponse {
+  status: string;
+  message: string;
+  data: {
+    id: string;
+    txRef: string;
+    amount: number;
+  };
+}
+
 const Page = () => {
+  const [loading, setLoading] = useState(true);
+  const [paymentResponse, setPaymentResponse] =
+    useState<PaymentResponse | null>(null);
   const searchParams = useSearchParams();
-  const getResponse = searchParams.get("resp");
-  const paymentResponse = getResponse ? JSON.parse(getResponse) : null;
+
+  useEffect(() => {
+    const getResponse = searchParams.get("resp");
+    const parsedResponse = getResponse ? JSON.parse(getResponse) : null;
+
+    // Simulate asynchronous data fetching
+    setTimeout(() => {
+      setPaymentResponse(parsedResponse);
+      setLoading(false);
+    }, 1000); // Adjust timeout as needed or replace with actual fetch call
+  }, [searchParams]);
+
+  if (loading) {
+    return <p>Loading...</p>; // Show loading state until data is fetched
+  }
 
   // Null check to prevent errors
   const status = paymentResponse ? paymentResponse.status : null;
