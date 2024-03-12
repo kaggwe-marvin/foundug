@@ -59,7 +59,7 @@ export async function action(
       phone_number: sanitizedTelNumber,
       currency: "UGX",
       fullname: full_name,
-      redirect_url: "https://5msp9bmm-3000.uks1.devtunnels.ms/Confirmation",
+      redirect_url: "https://foundug.vercel.app/Confirmation",
       network: selectedNetwork,
     };
 
