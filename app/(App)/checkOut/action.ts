@@ -1,4 +1,5 @@
 "use server";
+import { genTransactionRef, getNetworkFromPhoneNumber } from "@/app/lib/utils";
 import { ZodError, z } from "zod";
 
 export type Fields = {
@@ -48,17 +49,18 @@ export async function action(
       tel_number: sanitizedTelNumber,
       full_name: full_name,
     });
-
+    const Tx_ref = genTransactionRef();
+    const selectedNetwork = getNetworkFromPhoneNumber(sanitizedTelNumber);
     // Construct newCharge object with sanitized inputs
     const newCharge = {
-      tx_ref: "PT-9276543282",
+      tx_ref: Tx_ref,
       amount: "30000",
       email: sanitizedEmail,
       phone_number: sanitizedTelNumber,
       currency: "UGX",
       fullname: full_name,
-      redirect_url: "https://foundug.vercel.app/Confirmation",
-      network: "AIRTEL",
+      redirect_url: "https://5msp9bmm-3000.uks1.devtunnels.ms/Confirmation",
+      network: selectedNetwork,
     };
 
     const response = await fetch(
