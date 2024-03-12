@@ -26,7 +26,8 @@ export type FormState = {
 export async function action(
   prevState: FormState,
   formData: FormData
-): Promise<FormState> {const full_name = formData.get("fullname") as string;
+): Promise<FormState> {
+  const full_name = formData.get("fullname") as string;
   const email = formData.get("email") as string;
   const tel_number = formData.get("tel_number") as string;
 
@@ -44,7 +45,8 @@ export async function action(
     // Validate form data using the schema
     schema.parse({
       email: sanitizedEmail,
-      tel_number: sanitizedTelNumber,full_name:full_name
+      tel_number: sanitizedTelNumber,
+      full_name: full_name,
     });
 
     // Construct newCharge object with sanitized inputs
@@ -55,8 +57,7 @@ export async function action(
       phone_number: sanitizedTelNumber,
       currency: "UGX",
       fullname: full_name,
-      redirect_url:
-        "https://5msp9bmm-3000.uks1.devtunnels.ms/checkOut/Confirmation",
+      redirect_url: "https://5msp9bmm-3000.uks1.devtunnels.ms/Confirmation",
       network: "AIRTEL",
     };
 
@@ -85,7 +86,8 @@ export async function action(
         },
         fieldValues: {
           email: sanitizedEmail,
-          tel_number: sanitizedTelNumber,full_name
+          tel_number: sanitizedTelNumber,
+          full_name,
         },
       };
     }
@@ -96,7 +98,8 @@ export async function action(
       errors: undefined,
       fieldValues: {
         email: sanitizedEmail,
-        tel_number: sanitizedTelNumber,full_name
+        tel_number: sanitizedTelNumber,
+        full_name,
       },
       responseData: responseData,
     };
@@ -118,7 +121,8 @@ export async function action(
       errors: errorMap,
       fieldValues: {
         email: sanitizedEmail,
-        tel_number: sanitizedTelNumber,full_name
+        tel_number: sanitizedTelNumber,
+        full_name,
       },
     };
   }
