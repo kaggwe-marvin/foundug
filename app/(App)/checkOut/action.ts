@@ -41,6 +41,8 @@ export async function action(
     email: z.string().max(255),
     tel_number: z.string(),
   });
+  const Tx_ref = genTransactionRef();
+  const selectedNetwork = getNetworkFromPhoneNumber(sanitizedTelNumber);
 
   try {
     // Validate form data using the schema
@@ -49,8 +51,7 @@ export async function action(
       tel_number: sanitizedTelNumber,
       full_name: full_name,
     });
-    const Tx_ref = genTransactionRef();
-    const selectedNetwork = getNetworkFromPhoneNumber(sanitizedTelNumber);
+    sanitizedTelNumber;
     // Construct newCharge object with sanitized inputs
     const newCharge = {
       tx_ref: Tx_ref,
