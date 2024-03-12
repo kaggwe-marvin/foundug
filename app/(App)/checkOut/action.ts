@@ -54,7 +54,7 @@ export async function action(
     // Construct newCharge object with sanitized inputs
     const newCharge = {
       tx_ref: Tx_ref,
-      amount: "30000",
+      amount: "500",
       email: sanitizedEmail,
       phone_number: sanitizedTelNumber,
       currency: "UGX",
