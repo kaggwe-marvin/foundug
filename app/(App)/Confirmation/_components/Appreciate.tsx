@@ -14,10 +14,11 @@ export default function Appreciate() {
       {paymentResponse && (
         <>
           <p>status: {paymentResponse.status}</p>
-          <p>message: {paymentResponse.message}</p>
-          <p>data id:{paymentResponse.data.id}</p>
-          <p>data:{paymentResponse.data.txRef}</p>
-          <p>data amount:{paymentResponse.data.amount}</p>
+          <p>message: </p>
+          <p>data id:</p>
+          <p>data:</p>
+          <p>data amount:</p>
+          <p>is live:</p>
         </>
       )}
     </>

@@ -42,3 +42,25 @@ export async function upload(data: FormData) {
 
   return { uploadedData, publicUrl: urldata.publicUrl };
 }
+
+export function genTransactionRef() {
+  const timestamp = new Date().getTime();
+  const randomNum = Math.floor(Math.random() * 10000);
+  const transactionRef = `TX-${timestamp}-${randomNum}`;
+  return transactionRef;
+}
+
+export function getNetworkFromPhoneNumber(phoneNumber: any) {
+  const mtnPrefixes = ["077", "078", "076"];
+  const airtelPrefixes = ["074", "075", "070"];
+
+  const userPrefix = phoneNumber.substring(0, 3);
+
+  if (mtnPrefixes.includes(userPrefix)) {
+    return "MTN";
+  } else if (airtelPrefixes.includes(userPrefix)) {
+    return "AIRTEL";
+  } else {
+    return "Unknown";
+  }
+}

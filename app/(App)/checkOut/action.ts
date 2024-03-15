@@ -22,6 +22,9 @@ export type FormState = {
   fieldValues: Fields;
   responseData?: ResponseData;
 };
+function generateTxRef() {
+  return "TX-" + Math.random().toString(36).slice(2, 11);
+}
 
 export async function action(
   prevState: FormState,
@@ -48,17 +51,27 @@ export async function action(
       tel_number: sanitizedTelNumber,
       full_name: full_name,
     });
+    // Determine network based on sanitizedTelNumber prefix
+    let Network: string;
+    const prefix = sanitizedTelNumber.slice(0, 3);
+    if (["070", "074", "075"].includes(prefix)) {
+      Network = "AIRTEL";
+    } else if (["077", "078", "076"].includes(prefix)) {
+      Network = "MTN";
+    } else {
+      Network = "UNKNOWN"; // You can handle unknown prefixes as you see fit
+    }
 
     // Construct newCharge object with sanitized inputs
     const newCharge = {
-      tx_ref: "PT-9276543282",
-      amount: "30000",
+      tx_ref: generateTxRef(),
+      amount: "500",
       email: sanitizedEmail,
       phone_number: sanitizedTelNumber,
       currency: "UGX",
       fullname: full_name,
       redirect_url: "https://foundug.vercel.app/Confirmation",
-      network: "AIRTEL",
+      network: Network,
     };
 
     const response = await fetch(
