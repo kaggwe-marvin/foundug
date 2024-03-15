@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Header2 from "./ui/landing/header2";
 import Footer from "./ui/landing/footer";
-import { supabase } from "./lib/client";
+import { supabase } from "@/app/lib/client";
 
 export default async function page() {
   const { data: Lostitem, error } = await supabase

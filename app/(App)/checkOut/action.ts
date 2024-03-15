@@ -1,4 +1,5 @@
 "use server";
+import { genTransactionRef, getNetworkFromPhoneNumber } from "@/app/lib/utils";
 import { ZodError, z } from "zod";
 
 export type Fields = {
@@ -43,6 +44,8 @@ export async function action(
     email: z.string().max(255),
     tel_number: z.string(),
   });
+  const Tx_ref = genTransactionRef();
+  const selectedNetwork = getNetworkFromPhoneNumber(sanitizedTelNumber);
 
   try {
     // Validate form data using the schema
