@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FoundUG
+
+A web application for reporting and discovering lost-and-found items.
+
+**Live demo:** https://foundug.vercel.app
+
+> **Note:** This repository is currently **archived**. The codebase is provided as-is for reference.
+
+## Features
+
+- Create and browse listings for lost and found items
+- Modern UI built with Next.js and Tailwind CSS
+- Data validation with Zod
+- Backend services powered by Supabase
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + DaisyUI
+- **Backend / DB:** Supabase
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm (or yarn / pnpm)
+
+### Installation
+
+```bash
+git clone https://github.com/kaggwe-marvin/foundug.git
+cd foundug
+npm install
+```
+
+### Environment Variables
+
+Create a `.env.local` file in the project root and set the following values:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Run Locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `npm run dev` — start local development server
+- `npm run build` — build for production
+- `npm run start` — start production server
+- `npm run lint` — run ESLint
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is deployed on Vercel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Build command: `npm run build`
+- Output: Next.js default
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Because this repository is archived, contributions are not being accepted. If you'd like to build on the idea, feel free to fork the project.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+No license file is currently included in this repository. If you plan to reuse or redistribute this code, add an appropriate license first.
